@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html> 
+<head>
+    <title></title>
+</head>
+  
+<body>
+    <form class="flex flex-col justify-center 
+                 items-center mt-5" 
+          id="form">
+        <input class="border border-gray-400 
+                      rounded-md mt-5 p-1" 
+               type="text" 
+               placeholder="Name" 
+               id="myname">
+        <button class="bg-blue-500 rounded-md p-2 
+                       text-white mt-5">
+              Gönder
+          </button>
+    </form>
+    <div class="flex flex-col justify-center 
+                items-center mt-5" 
+         id="messageArea">
+    </div>
+</body>
+<script src="http://node.emkologin.com:5000/socket.io/socket.io.js"></script>
+<script>
+    let socket = io();
+  
+    let form = document.getElementById('form');
+    let myname = document.getElementById('myname');
+    let messageArea = document.getElementById("messageArea");
+  
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+		
+        socket.emit('userConnected', myname.value);
+    });
+  
+    socket.on("response", (response) => {
+        console.log(response);
+    });
+	
+	socket.on("response2", (response) => {
+        console.log(response);
+    });
+</script>
+  
+</html>
